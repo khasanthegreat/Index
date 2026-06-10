@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical English 1 — Glossary</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f0f4f8;
+    color: #222;
+    min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(135deg, #7b2d8b, #4a90d9);
+    color: white;
+    padding: 16px;
+    text-align: center;
+  }
+  header h1 { font-size: 18px; font-weight: 700; }
+  header p { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+
+  .search-box {
+    padding: 12px 16px;
+    background: white;
+    border-bottom: 2px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .search-box input {
+    width: 100%;
+    padding: 10px 14px 10px 38px;
+    border: 2px solid #7b2d8b;
+    border-radius: 24px;
+    font-size: 15px;
+    outline: none;
+    background: #f9f0ff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237b2d8b' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") no-repeat 12px center;
+  }
+
+  .filter-bar {
+    display: flex;
+    gap: 6px;
+    padding: 10px 16px;
+    overflow-x: auto;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .filter-bar button {
+    white-space: nowrap;
+    padding: 5px 12px;
+    border: 1.5px solid #7b2d8b;
+    border-radius: 20px;
+    background: white;
+    color: #7b2d8b;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-bar button.active,
+  .filter-bar button:hover {
+    background: #7b2d8b;
+    color: white;
+  }
+
+  .counter {
+    padding: 6px 16px;
+    font-size: 12px;
+    color: #888;
+    background: #f0f4f8;
+  }
+
+  .section-title {
+    background: #7b2d8b;
+    color: white;
+    padding: 7px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .word-list { background: white; }
+  .word-item {
+    display: flex;
+    align-items: center;
+    padding: 11px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.15s;
+  }
+  .word-item:hover { background: #f9f0ff; }
+  .word-item.hidden { display: none; }
+
+  .word-en {
+    font-weight: 600;
+    font-size: 15px;
+    color: #2c2c2c;
+    min-width: 140px;
+    flex-shrink: 0;
+  }
+  .arrow {
+    color: #7b2d8b;
+    margin: 0 10px;
+    font-size: 14px;
+  }
+  .word-uz {
+    font-size: 14px;
+    color: #444;
+    flex: 1;
+  }
+  .tag {
+    font-size: 10px;
+    background: #e8d5f5;
+    color: #7b2d8b;
+    border-radius: 10px;
+    padding: 2px 7px;
+    margin-left: 6px;
+    white-space: nowrap;
+  }
+
+  .no-result {
+    text-align: center;
+    padding: 40px 16px;
+    color: #aaa;
+    font-size: 14px;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📚 Technical English 1 — Glossary</h1>
+  <p>Barcha so'zlar — o'zbek tarjimasi bilan</p>
+</header>
+
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="So'z qidiring... (e.g. hammer)" oninput="filterWords()">
+</div>
+
+<div class="filter-bar">
+  <button class="active" onclick="filterCategory('all', this)">Hammasi</button>
+  <button onclick="filterCategory('tools', this)">🔧 Tools</button>
+  <button onclick="filterCategory('verbs', this)">⚡ Verbs</button>
+  <button onclick="filterCategory('parts', this)">🔩 Parts</button>
+  <button onclick="filterCategory('movement', this)">🏃 Movement</button>
+  <button onclick="filterCategory('flow', this)">💧 Flow</button>
+  <button onclick="filterCategory('quantities', this)">📏 Quantities</button>
+  <button onclick="filterCategory('damage', this)">⚠️ Damage</button>
+  <button onclick="filterCategory('locations', this)">📍 Locations</button>
+  <button onclick="filterCategory('general', this)">📝 General</button>
+</div>
+
+<div class="counter" id="counter"></div>
+
+<div id="wordContainer">
+
+<!-- TOOLS -->
+<div class="section-title" data-cat="tools">🔧 Tools — Asboblar</div>
+<div class="word-list">
+  <div class="word-item" data-cat="tools"><span class="word-en">adapter</span><span class="arrow">→</span><span class="word-uz">adapter</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">antenna</span><span class="arrow">→</span><span class="word-uz">antenna</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">blade</span><span class="arrow">→</span><span class="word-uz">pichoq, tigʻ</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">bolt</span><span class="arrow">→</span><span class="word-uz">bolt, vint</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">bottle opener</span><span class="arrow">→</span><span class="word-uz">shisha ochirgich</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">cable</span><span class="arrow">→</span><span class="word-uz">kabel, sim</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">can opener</span><span class="arrow">→</span><span class="word-uz">konserva ochirgich</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">chisel</span><span class="arrow">→</span><span class="word-uz">qiyma, iskana</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">crane</span><span class="arrow">→</span><span class="word-uz">kran</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">digger</span><span class="arrow">→</span><span class="word-uz">ekskavator</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">drill</span><span class="arrow">→</span><span class="word-uz">burg'u</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">hammer</span><span class="arrow">→</span><span class="word-uz">bolg'a</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">nail</span><span class="arrow">→</span><span class="word-uz">mix</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">nut</span><span class="arrow">→</span><span class="word-uz">gayka</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">pick</span><span class="arrow">→</span><span class="word-uz">bolta, kasvul</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">pliers</span><span class="arrow">→</span><span class="word-uz">qisqich</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">plug</span><span class="arrow">→</span><span class="word-uz">vilka, tiqin</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">ruler</span><span class="arrow">→</span><span class="word-uz">chizgʻich</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">saw</span><span class="arrow">→</span><span class="word-uz">arra</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">scaffolding</span><span class="arrow">→</span><span class="word-uz">iskala, tuxta</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">scissors</span><span class="arrow">→</span><span class="word-uz">qaychi</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">screw</span><span class="arrow">→</span><span class="word-uz">vint</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">screwdriver</span><span class="arrow">→</span><span class="word-uz">otvertka</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">sledgehammer</span><span class="arrow">→</span><span class="word-uz">katta bolg'a</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">spanner</span><span class="arrow">→</span><span class="word-uz">gayka kaliti</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">washer</span><span class="arrow">→</span><span class="word-uz">shayba</span></div>
+  <div class="word-item" data-cat="tools"><span class="word-en">wrench</span><span class="arrow">→</span><span class="word-uz">kalit (AmE)</span></div>
+</div>
+
+<!-- PARTS -->
+<div class="section-title" data-cat="parts">🔩 Parts — Qismlar</div>
+<div class="word-list">
+  <div class="word-item" data-cat="parts"><span class="word-en">accelerator</span><span class="arrow">→</span><span class="word-uz">gaz pedali</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">alarm</span><span class="arrow">→</span><span class="word-uz">signal, ogohlantirish</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">battery</span><span class="arrow">→</span><span class="word-uz">batareya</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">beam</span><span class="arrow">→</span><span class="word-uz">to'sin, tir</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">brake</span><span class="arrow">→</span><span class="word-uz">tormoz</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">clock</span><span class="arrow">→</span><span class="word-uz">soat</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">compass</span><span class="arrow">→</span><span class="word-uz">kompas</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">conductor</span><span class="arrow">→</span><span class="word-uz">o'tkazgich</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">controller</span><span class="arrow">→</span><span class="word-uz">boshqaruvchi</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">cover</span><span class="arrow">→</span><span class="word-uz">qopqoq, g'ilof</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">dynamo</span><span class="arrow">→</span><span class="word-uz">dinamo generator</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">fork</span><span class="arrow">→</span><span class="word-uz">vilka (pogʻona)</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">fuse</span><span class="arrow">→</span><span class="word-uz">siqgʻich, predoxranitel</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">handle</span><span class="arrow">→</span><span class="word-uz">dasta, tutqich</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">hard hat</span><span class="arrow">→</span><span class="word-uz">himoya dubulg'asi</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">head</span><span class="arrow">→</span><span class="word-uz">bosh qism</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">inlet</span><span class="arrow">→</span><span class="word-uz">kirish teshigi</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">jacket</span><span class="arrow">→</span><span class="word-uz">kurtka</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">jaws</span><span class="arrow">→</span><span class="word-uz">changallar</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">lamp</span><span class="arrow">→</span><span class="word-uz">chiroq, lampa</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">lever</span><span class="arrow">→</span><span class="word-uz">richag, dasta</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">outlet</span><span class="arrow">→</span><span class="word-uz">chiqish teshigi</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">pedal</span><span class="arrow">→</span><span class="word-uz">pedal</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">pier</span><span class="arrow">→</span><span class="word-uz">ustun, tayanchpoya</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">pump</span><span class="arrow">→</span><span class="word-uz">nasos</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">pylon</span><span class="arrow">→</span><span class="word-uz">ustun (ko'prik)</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">shaft</span><span class="arrow">→</span><span class="word-uz">o'q, mil</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">solar panel</span><span class="arrow">→</span><span class="word-uz">quyosh paneli</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">speaker</span><span class="arrow">→</span><span class="word-uz">dinamik, karnay</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">steering wheel</span><span class="arrow">→</span><span class="word-uz">rul</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">switch</span><span class="arrow">→</span><span class="word-uz">kalit, tugma</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">terminal</span><span class="arrow">→</span><span class="word-uz">terminal, uchlik</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">thermometer</span><span class="arrow">→</span><span class="word-uz">termometr</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">torch</span><span class="arrow">→</span><span class="word-uz">fonar</span></div>
+  <div class="word-item" data-cat="parts"><span class="word-en">valve</span><span class="arrow">→</span><span class="word-uz">klapan, ventil</span></div>
+</div>
+
+<!-- VERBS -->
+<div class="section-title" data-cat="verbs">⚡ Verbs — Fe'llar</div>
+<div class="word-list">
+  <div class="word-item" data-cat="verbs"><span class="word-en">attach</span><span class="arrow">→</span><span class="word-uz">biriktirish</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">bend</span><span class="arrow">→</span><span class="word-uz">egilmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">break</span><span class="arrow">→</span><span class="word-uz">sinmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">burn</span><span class="arrow">→</span><span class="word-uz">kuymoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">charge</span><span class="arrow">→</span><span class="word-uz">zaryadlash</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">climb down</span><span class="arrow">→</span><span class="word-uz">pastga tushish</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">connect</span><span class="arrow">→</span><span class="word-uz">ulamoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">convert</span><span class="arrow">→</span><span class="word-uz">aylantirmoq, o'zgartirmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">crack</span><span class="arrow">→</span><span class="word-uz">yorilmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">cut</span><span class="arrow">→</span><span class="word-uz">kesmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">dent</span><span class="arrow">→</span><span class="word-uz">botmoq, ezilmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">drive</span><span class="arrow">→</span><span class="word-uz">haydamoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">drive in</span><span class="arrow">→</span><span class="word-uz">kirib bormoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">enter</span><span class="arrow">→</span><span class="word-uz">kirmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">fall over</span><span class="arrow">→</span><span class="word-uz">yiqilmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">flow</span><span class="arrow">→</span><span class="word-uz">oqmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">grip</span><span class="arrow">→</span><span class="word-uz">ushlamoq, qismoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">launch</span><span class="arrow">→</span><span class="word-uz">uchirib yubormoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">leave</span><span class="arrow">→</span><span class="word-uz">chiqib ketmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">listen</span><span class="arrow">→</span><span class="word-uz">eshitmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">loosen</span><span class="arrow">→</span><span class="word-uz">bo'shatmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">lower</span><span class="arrow">→</span><span class="word-uz">tushirmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">measure</span><span class="arrow">→</span><span class="word-uz">o'lchamoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">move back</span><span class="arrow">→</span><span class="word-uz">orqaga siljish</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">pick up</span><span class="arrow">→</span><span class="word-uz">ko'tarmoq, olmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">pull</span><span class="arrow">→</span><span class="word-uz">tortmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">push</span><span class="arrow">→</span><span class="word-uz">itarmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">put down</span><span class="arrow">→</span><span class="word-uz">qo'ymoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">put on</span><span class="arrow">→</span><span class="word-uz">kiymoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">raise</span><span class="arrow">→</span><span class="word-uz">ko'tarmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">read</span><span class="arrow">→</span><span class="word-uz">o'qimoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">receive</span><span class="arrow">→</span><span class="word-uz">qabul qilmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">reverse</span><span class="arrow">→</span><span class="word-uz">orqaga yurmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">rise</span><span class="arrow">→</span><span class="word-uz">ko'tarilmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">rotate</span><span class="arrow">→</span><span class="word-uz">aylanmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">say</span><span class="arrow">→</span><span class="word-uz">aytmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">scratch</span><span class="arrow">→</span><span class="word-uz">tirnalamoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">shine</span><span class="arrow">→</span><span class="word-uz">yoritmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">sink</span><span class="arrow">→</span><span class="word-uz">cho'kmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">sit</span><span class="arrow">→</span><span class="word-uz">o'tirmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">stand</span><span class="arrow">→</span><span class="word-uz">turmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">start</span><span class="arrow">→</span><span class="word-uz">boshlash</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">stop</span><span class="arrow">→</span><span class="word-uz">to'xtatmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">store</span><span class="arrow">→</span><span class="word-uz">saqlash</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">take off</span><span class="arrow">→</span><span class="word-uz">echmoq, yechmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">tear</span><span class="arrow">→</span><span class="word-uz">yirtmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">tighten</span><span class="arrow">→</span><span class="word-uz">mahkamlamoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">tilt</span><span class="arrow">→</span><span class="word-uz">qiyalitmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">turn</span><span class="arrow">→</span><span class="word-uz">burilmoq, aylantirmoq</span></div>
+  <div class="word-item" data-cat="verbs"><span class="word-en">write</span><span class="arrow">→</span><span class="word-uz">yozmoq</span></div>
+</div>
+
+<!-- MOVEMENT -->
+<div class="section-title" data-cat="movement">🏃 Movement — Harakat</div>
+<div class="word-list">
+  <div class="word-item" data-cat="movement"><span class="word-en">backwards</span><span class="arrow">→</span><span class="word-uz">orqaga</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">diagonal</span><span class="arrow">→</span><span class="word-uz">diagonal</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">diagonally up</span><span class="arrow">→</span><span class="word-uz">diagonal yuqoriga</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">direction</span><span class="arrow">→</span><span class="word-uz">yo'nalish</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">down</span><span class="arrow">→</span><span class="word-uz">pastga</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">forwards</span><span class="arrow">→</span><span class="word-uz">oldinga</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">horizontal</span><span class="arrow">→</span><span class="word-uz">gorizontal</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">sideways</span><span class="arrow">→</span><span class="word-uz">yonga</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">straight up</span><span class="arrow">→</span><span class="word-uz">to'g'ri yuqoriga</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">up</span><span class="arrow">→</span><span class="word-uz">yuqoriga</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">vertical</span><span class="arrow">→</span><span class="word-uz">vertikal</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">axis</span><span class="arrow">→</span><span class="word-uz">o'q</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">elbow</span><span class="arrow">→</span><span class="word-uz">tirsak</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">forearm</span><span class="arrow">→</span><span class="word-uz">bilak</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">pivot</span><span class="arrow">→</span><span class="word-uz">aylanish o'qi</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">shoulder</span><span class="arrow">→</span><span class="word-uz">yelka</span></div>
+  <div class="word-item" data-cat="movement"><span class="word-en">wrist</span><span class="arrow">→</span><span class="word-uz">bilek</span></div>
+</div>
+
+<!-- FLOW -->
+<div class="section-title" data-cat="flow">💧 Flow — Oqim</div>
+<div class="word-list">
+  <div class="word-item" data-cat="flow"><span class="word-en">circuit</span><span class="arrow">→</span><span class="word-uz">zanjir, sxema</span></div>
+  <div class="word-item" data-cat="flow"><span class="word-en">current</span><span class="arrow">→</span><span class="word-uz">elektr toki</span></div>
+  <div class="word-item" data-cat="flow"><span class="word-en">electricity</span><span class="arrow">→</span><span class="word-uz">elektr</span></div>
+  <div class="word-item" data-cat="flow"><span class="word-en">negative</span><span class="arrow">→</span><span class="word-uz">manfiy</span></div>
+  <div class="word-item" data-cat="flow"><span class="word-en">pipe</span><span class="arrow">→</span><span class="word-uz">truba, quvur</span></div>
+  <div class="word-item" data-cat="flow"><span class="word-en">positive</span><span class="arrow">→</span><span class="word-uz">musbat</span></div>
+  <div class="word-item" data-cat="flow"><span class="word-en">power supply</span><span class="arrow">→</span><span class="word-uz">quvvat manbai</span></div>
+  <div class="word-item" data-cat="flow"><span class="word-en">tank</span><span class="arrow">→</span><span class="word-uz">bak, idish</span></div>
+  <div class="word-item" data-cat="flow"><span class="word-en">water heater</span><span class="arrow">→</span><span class="word-uz">suv isitgich</span></div>
+  <div class="word-item" data-cat="flow"><span class="word-en">AC adapter</span><span class="arrow">→</span><span class="word-uz">AC adapter</span></div>
+  <div class="word-item" data-cat="flow"><span class="word-en">DC current</span><span class="arrow">→</span><span class="word-uz">o'zgarmas tok</span></div>
+  <div class="word-item" data-cat="flow"><span class="word-en">mains electricity</span><span class="arrow">→</span><span class="word-uz">shahар elektr tarmog'i</span></div>
+  <div class="word-item" data-cat="flow"><span class="word-en">short-circuit</span><span class="arrow">→</span><span class="word-uz">qisqa tutashuv</span></div>
+</div>
+
+<!-- LOCATIONS -->
+<div class="section-title" data-cat="locations">📍 Locations — Joylashuv</div>
+<div class="word-list">
+  <div class="word-item" data-cat="locations"><span class="word-en">above</span><span class="arrow">→</span><span class="word-uz">ustida</span></div>
+  <div class="word-item" data-cat="locations"><span class="word-en">at the bottom</span><span class="arrow">→</span><span class="word-uz">pastki qismda</span></div>
+  <div class="word-item" data-cat="locations"><span class="word-en">at the top</span><span class="arrow">→</span><span class="word-uz">yuqori qismda</span></div>
+  <div class="word-item" data-cat="locations"><span class="word-en">below</span><span class="arrow">→</span><span class="word-uz">ostida</span></div>
+  <div class="word-item" data-cat="locations"><span class="word-en">centre</span><span class="arrow">→</span><span class="word-uz">markazda</span></div>
+  <div class="word-item" data-cat="locations"><span class="word-en">in the middle</span><span class="arrow">→</span><span class="word-uz">o'rtada</span></div>
+  <div class="word-item" data-cat="locations"><span class="word-en">on the left</span><span class="arrow">→</span><span class="word-uz">chapda</span></div>
+  <div class="word-item" data-cat="locations"><span class="word-en">on the right</span><span class="arrow">→</span><span class="word-uz">o'ngda</span></div>
+  <div class="word-item" data-cat="locations"><span class="word-en">to the left of</span><span class="arrow">→</span><span class="word-uz">chapiga nisbatan</span></div>
+  <div class="word-item" data-cat="locations"><span class="word-en">to the right of</span><span class="arrow">→</span><span class="word-uz">o'ngiga nisbatan</span></div>
+</div>
+
+<!-- QUANTITIES -->
+<div class="section-title" data-cat="quantities">📏 Quantities — Miqdor</div>
+<div class="word-list">
+  <div class="word-item" data-cat="quantities"><span class="word-en">cement</span><span class="arrow">→</span><span class="word-uz">sement</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">concrete</span><span class="arrow">→</span><span class="word-uz">beton</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">countable</span><span class="arrow">→</span><span class="word-uz">sanaladigan</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">footprint</span><span class="arrow">→</span><span class="word-uz">yer maydoni</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">glue</span><span class="arrow">→</span><span class="word-uz">yelim</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">height</span><span class="arrow">→</span><span class="word-uz">balandlik</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">length</span><span class="arrow">→</span><span class="word-uz">uzunlik</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">material</span><span class="arrow">→</span><span class="word-uz">material</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">oil</span><span class="arrow">→</span><span class="word-uz">yog'</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">paint</span><span class="arrow">→</span><span class="word-uz">bo'yoq</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">sand</span><span class="arrow">→</span><span class="word-uz">qum</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">span</span><span class="arrow">→</span><span class="word-uz">oraliq, ko'prik bo'limi</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">steel</span><span class="arrow">→</span><span class="word-uz">po'lat</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">storey</span><span class="arrow">→</span><span class="word-uz">qavat</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">tonne</span><span class="arrow">→</span><span class="word-uz">tonna</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">uncountable</span><span class="arrow">→</span><span class="word-uz">sanalmaydigan</span></div>
+  <div class="word-item" data-cat="quantities"><span class="word-en">width</span><span class="arrow">→</span><span class="word-uz">kenglik</span></div>
+</div>
+
+<!-- DAMAGE -->
+<div class="section-title" data-cat="damage">⚠️ Damage — Shikast</div>
+<div class="word-list">
+  <div class="word-item" data-cat="damage"><span class="word-en">bent</span><span class="arrow">→</span><span class="word-uz">egilgan</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">body</span><span class="arrow">→</span><span class="word-uz">tana, gövde</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">bonnet</span><span class="arrow">→</span><span class="word-uz">kapot</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">broken</span><span class="arrow">→</span><span class="word-uz">singan</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">bumper</span><span class="arrow">→</span><span class="word-uz">bamper</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">burnt</span><span class="arrow">→</span><span class="word-uz">kuygan</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">cracked</span><span class="arrow">→</span><span class="word-uz">yorilgan</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">damaged</span><span class="arrow">→</span><span class="word-uz">shikastlangan</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">dented</span><span class="arrow">→</span><span class="word-uz">botgan, ezilgan</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">display screen</span><span class="arrow">→</span><span class="word-uz">ekran</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">dropped</span><span class="arrow">→</span><span class="word-uz">tushirilgan</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">insulation</span><span class="arrow">→</span><span class="word-uz">izolyatsiya</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">missing</span><span class="arrow">→</span><span class="word-uz">yo'qolgan</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">scratched</span><span class="arrow">→</span><span class="word-uz">tirnalgan</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">torn</span><span class="arrow">→</span><span class="word-uz">yirtilgan</span></div>
+  <div class="word-item" data-cat="damage"><span class="word-en">windscreen</span><span class="arrow">→</span><span class="word-uz">old shisha</span></div>
+</div>
+
+<!-- GENERAL -->
+<div class="section-title" data-cat="general">📝 General — Umumiy</div>
+<div class="word-list">
+  <div class="word-item" data-cat="general"><span class="word-en">approximately</span><span class="arrow">→</span><span class="word-uz">taxminan</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">block capitals</span><span class="arrow">→</span><span class="word-uz">bosh harflar</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">builder</span><span class="arrow">→</span><span class="word-uz">qurilishchi</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">bucket</span><span class="arrow">→</span><span class="word-uz">chelak</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">checklist</span><span class="arrow">→</span><span class="word-uz">tekshiruv ro'yxati</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">complete</span><span class="arrow">→</span><span class="word-uz">to'ldirmoq</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">correct</span><span class="arrow">→</span><span class="word-uz">to'g'ri</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">customer</span><span class="arrow">→</span><span class="word-uz">mijoz</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">decade</span><span class="arrow">→</span><span class="word-uz">o'n yil</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">describe</span><span class="arrow">→</span><span class="word-uz">tasvirlamoq</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">electrician</span><span class="arrow">→</span><span class="word-uz">elektrik</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">engineer</span><span class="arrow">→</span><span class="word-uz">muhandis</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">equipment</span><span class="arrow">→</span><span class="word-uz">jihozlar</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">example</span><span class="arrow">→</span><span class="word-uz">misol</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">external</span><span class="arrow">→</span><span class="word-uz">tashqi</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">fibreglass</span><span class="arrow">→</span><span class="word-uz">shisha tolali plastik</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">internal</span><span class="arrow">→</span><span class="word-uz">ichki</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">levitated</span><span class="arrow">→</span><span class="word-uz">havoda muallaq</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">magnetic</span><span class="arrow">→</span><span class="word-uz">magnit</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">manual</span><span class="arrow">→</span><span class="word-uz">qo'llanma</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">mechanic</span><span class="arrow">→</span><span class="word-uz">mexanik</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">occupation</span><span class="arrow">→</span><span class="word-uz">kasb</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">opposite</span><span class="arrow">→</span><span class="word-uz">qarama-qarshi</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">plural</span><span class="arrow">→</span><span class="word-uz">ko'plik</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">reinforced</span><span class="arrow">→</span><span class="word-uz">mustahkamlangan</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">repair</span><span class="arrow">→</span><span class="word-uz">ta'mirlash</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">satellite</span><span class="arrow">→</span><span class="word-uz">sun'iy yo'ldosh</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">singular</span><span class="arrow">→</span><span class="word-uz">birlik</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">specification</span><span class="arrow">→</span><span class="word-uz">texnik xususiyat</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">surface</span><span class="arrow">→</span><span class="word-uz">sirt, yuzasi</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">technician</span><span class="arrow">→</span><span class="word-uz">texnik</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">tunnel</span><span class="arrow">→</span><span class="word-uz">tunnel</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">vacuum</span><span class="arrow">→</span><span class="word-uz">vakuum</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">voltage</span><span class="arrow">→</span><span class="word-uz">kuchlanish</span></div>
+  <div class="word-item" data-cat="general"><span class="word-en">wire</span><span class="arrow">→</span><span class="word-uz">sim, o'tkazgich</span></div>
+</div>
+
+</div><!-- end wordContainer -->
+
+<div class="no-result" id="noResult">🔍 Hech narsa topilmadi</div>
+
+<script>
+  let currentCat = 'all';
+
+  function updateCounter() {
+    const visible = document.querySelectorAll('.word-item:not(.hidden)').length;
+    const total = document.querySelectorAll('.word-item').length;
+    document.getElementById('counter').textContent = visible + ' ta so\'z ko\'rsatilmoqda (jami: ' + total + ')';
+  }
+
+  function filterWords() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const items = document.querySelectorAll('.word-item');
+    const sections = document.querySelectorAll('.section-title');
+    let anyVisible = false;
+
+    items.forEach(item => {
+      const cat = item.getAttribute('data-cat');
+      const en = item.querySelector('.word-en').textContent.toLowerCase();
+      const uz = item.querySelector('.word-uz').textContent.toLowerCase();
+      const catMatch = currentCat === 'all' || cat === currentCat;
+      const textMatch = query === '' || en.includes(query) || uz.includes(query);
+      if (catMatch && textMatch) {
+        item.classList.remove('hidden');
+        anyVisible = true;
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+
+    sections.forEach(sec => {
+      const cat = sec.getAttribute('data-cat');
+      const nextList = sec.nextElementSibling;
+      const hasVisible = nextList && nextList.querySelector('.word-item:not(.hidden)');
+      sec.style.display = (currentCat === 'all' || cat === currentCat) && hasVisible ? '' : 'none';
+      if (nextList) nextList.style.display = hasVisible ? '' : 'none';
+    });
+
+    document.getElementById('noResult').style.display = anyVisible ? 'none' : 'block';
+    updateCounter();
+  }
+
+  function filterCategory(cat, btn) {
+    currentCat = cat;
+    document.querySelectorAll('.filter-bar button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('searchInput').value = '';
+    filterWords();
+  }
+
+  updateCounter();
+</script>
+</body>
+</html>
